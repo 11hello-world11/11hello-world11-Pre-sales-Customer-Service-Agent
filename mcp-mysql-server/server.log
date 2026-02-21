@@ -1,0 +1,3 @@
+{"level":30,"time":1771078256639,"pid":22088,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"user\",\"password\":\"******\",\"database\":\"database\",\"port\":3306}"}
+{"level":30,"time":1771078256639,"pid":22088,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":50,"time":1771078310671,"pid":22088,"hostname":"DESKTOP-9OJG32T","msg":"[MCP Error]"}
