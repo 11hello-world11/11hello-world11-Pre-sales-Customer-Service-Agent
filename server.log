@@ -1,8 +1,0 @@
-{"level":30,"time":1772115961319,"pid":31464,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
-{"level":30,"time":1772115961319,"pid":31464,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
-{"level":30,"time":1772116058498,"pid":25544,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
-{"level":30,"time":1772116058499,"pid":25544,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
-{"level":30,"time":1772116061194,"pid":32708,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
-{"level":30,"time":1772116061195,"pid":32708,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
-{"level":30,"time":1772116066643,"pid":23668,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
-{"level":30,"time":1772116066643,"pid":23668,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
