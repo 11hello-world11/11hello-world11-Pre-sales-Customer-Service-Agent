@@ -1,83 +1,14 @@
+from typing import List
 import os
 import asyncio
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_core.messages import HumanMessage, ToolMessage, SystemMessage
-from langchain_core.tools import tool
+from tools import search_local_knowledge, ask_supervisor_approval
 
 # 加载 .env 文件中的环境变量
 load_dotenv()
-
-@tool
-def search_local_knowledge(query: str) -> str:
-    """
-    Search for answers in local text files within the 'QA_txt' directory.
-    Useful for answering general questions about product features, common issues, and opening requirements.
-    The tool searches for keywords in '开场了解需求话术_QA.txt', '产品功能介绍话术_QA.txt', and '常见问题话术_QA.txt'.
-    
-    Args:
-        query: The search query string.
-    """
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    qa_dir = os.path.join(base_dir, "QA_txt")
-    
-    if not os.path.exists(qa_dir):
-        return f"Error: Directory {qa_dir} does not exist."
-    
-    results = []
-    files_to_search = [
-        "开场了解需求话术_QA.txt", 
-        "产品功能介绍话术_QA.txt", 
-        "常见问题话术_QA.txt"
-    ]
-    
-    for filename in files_to_search:
-        filepath = os.path.join(qa_dir, filename)
-        if os.path.exists(filepath):
-            try:
-                with open(filepath, "r", encoding="utf-8") as f:
-                    content = f.read()
-                    
-                    # 简单的全文搜索
-                    if query in content:
-                        lines = content.split('\n')
-                        for i, line in enumerate(lines):
-                            if query in line:
-                                context_start = max(0, i - 2)
-                                context_end = min(len(lines), i + 5)
-                                snippet = "\n".join(lines[context_start:context_end])
-                                results.append(f"--- Found in {filename} ---\n{snippet}\n")
-                    else:
-                        # 尝试更宽松的搜索：如果 query 是问句，尝试提取关键词
-                        # 这里简单处理，如果完全没找到，就不返回
-                        pass
-                        
-            except Exception as e:
-                results.append(f"Error reading {filename}: {str(e)}")
-    
-    if not results:
-        return "No direct matches found in local knowledge base."
-        
-    return "\n".join(results)
-
-@tool
-def ask_supervisor_approval(application_details: str) -> str:
-    """
-    Simulate sending a price application to a supervisor (the human user) and waiting for approval.
-    Use this tool when the customer requests a price lower than the calculated price.
-    
-    Args:
-        application_details: A formatted string containing the application details (Size, Config, Price, etc.).
-    """
-    print("\n" + "="*50)
-    print("📢 【向主管申请价格】")
-    print(application_details)
-    print("="*50 + "\n")
-    
-    # 真实地等待用户（主管）输入
-    approval = input("主管请批复 (同意/拒绝/其他指令): ")
-    return f"主管批复: {approval}"
 
 async def main():
     # 1. 定义大模型 (LLM)
