@@ -6,13 +6,12 @@ from langchain_openai import ChatOpenAI
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_core.messages import HumanMessage, ToolMessage, SystemMessage
 from tools import search_local_knowledge, ask_supervisor_approval
+from logger import logger
 
-# 加载 .env 文件中的环境变量
 load_dotenv()
 
 async def main():
-    # 1. 定义大模型 (LLM)
-    print("初始化 LLM...")
+    logger.info("初始化 LLM...")
     llm = ChatOpenAI(
         model="deepseek-chat", 
         temperature=0,
@@ -26,9 +25,9 @@ async def main():
     mysql_server_dir = os.path.join(base_dir, "mcp-mysql-server")
     mysql_env_path = os.path.join(mysql_server_dir, "env")
     
-    mysql_env = os.environ.copy() # 继承当前环境变量
+    mysql_env = os.environ.copy()
     if os.path.exists(mysql_env_path):
-        print(f"读取 MySQL 环境变量: {mysql_env_path}")
+        logger.info(f"读取 MySQL 环境变量: {mysql_env_path}")
         with open(mysql_env_path, "r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
@@ -42,7 +41,7 @@ async def main():
     # 构建启动命令
     script_path = os.path.join(mysql_server_dir, "node_modules", "@fhuang", "mcp-mysql-server", "build", "index.js")
     
-    print(f"MCP Server 脚本路径: {script_path}")
+    logger.info(f"MCP Server 脚本路径: {script_path}")
     
     # 3. 初始化 MCP Client
     client = MultiServerMCPClient({
@@ -54,16 +53,14 @@ async def main():
         }
     })
         
-    print("连接 MCP Server 并获取工具...")
+    logger.info("连接 MCP Server 并获取工具...")
     try:
         mcp_tools = await client.get_tools()
         # 合并 MCP 工具和本地工具
         tools = mcp_tools + [search_local_knowledge, ask_supervisor_approval]
         
-        print(f"成功获取 {len(tools)} 个工具: {[t.name for t in tools]}")
-
-        # 4. 手动实现简单的 Agent Loop
-        print("开始运行智能体... (输入 'exit' 或 'quit' 退出)")
+        logger.info(f"成功获取 {len(tools)} 个工具: {[t.name for t in tools]}")
+        logger.info("开始运行智能体... (输入 'exit' 或 'quit' 退出)")
         
         # 读取 System Prompt
         system_prompt_path = os.path.join(base_dir, "system_prompt.txt")
@@ -80,9 +77,12 @@ async def main():
         while True:
             try:
                 user_input = input("\nUser: ")
+                logger.info(f"用户输入: {user_input}")
                 if user_input.lower() in ["exit", "quit"]:
+                    logger.info("用户退出会话")
                     break
             except EOFError:
+                logger.warning("收到 EOF，退出会话")
                 break
 
             # 构造当前对话的消息列表
@@ -103,8 +103,8 @@ async def main():
                     messages.append(response)
                     
                     if response.tool_calls:
-                        # 打印思考过程（如果有）
                         if response.content:
+                            logger.debug(f"思考过程: {response.content}")
                             print(f"\n> 思考过程:\n{response.content}\n")
 
                         # 执行工具
@@ -113,22 +113,21 @@ async def main():
                             tool_args = tool_call["args"]
                             tool_id = tool_call["id"]
                             
-                            # 模拟 UI 卡片展示
+                            logger.info(f"调用工具: {tool_name}, 参数: {tool_args}")
                             print(f"🔧 调用工具: {tool_name}")
                             print(f"   参数: {tool_args}")
                             
-                            # 找到对应的工具函数
                             selected_tool = next((t for t in tools if t.name == tool_name), None)
                             if selected_tool:
                                 try:
-                                    # 工具可能是同步或异步的
                                     tool_result = await selected_tool.ainvoke(tool_args)
                                 except Exception as e:
+                                    logger.error(f"工具执行错误: {e}")
                                     tool_result = f"Error: {e}"
                                 
-                                # 截断过长的输出，保持界面整洁
                                 result_str = str(tool_result)
                                 display_result = result_str[:200] + "..." if len(result_str) > 200 else result_str
+                                logger.info(f"工具执行结果: {display_result}")
                                 print(f"   结果: {display_result}\n")
                                 
                                 # 添加工具结果消息到 messages (用于下一轮思考)
@@ -139,7 +138,7 @@ async def main():
                         continue
                     
                     else:
-                        # 没有工具调用，说明是最终回答
+                        logger.info(f"Final Answer: {response.content}")
                         print("-" * 50)
                         print(f"Final Answer:\n{response.content}")
                         print("-" * 50)
@@ -153,10 +152,12 @@ async def main():
                         break
 
                 except Exception as e:
+                    logger.error(f"对话处理出错: {e}")
                     print(f"对话处理出错: {e}")
                     break
 
     except Exception as e:
+        logger.error(f"运行出错: {e}")
         print(f"运行出错: {e}")
     
     # 注意: langchain-mcp-adapters 目前版本不需要显式关闭 client
