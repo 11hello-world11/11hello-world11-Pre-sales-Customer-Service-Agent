@@ -67,15 +67,12 @@ def search_local_knowledge(query: str) -> str:
             return "知识库为空，请先构建：运行 python build_rag.py"
         results = collection.query(
             query_texts=[query],
-            n_results=3
+            n_results=1
         )
         if not results['documents'] or not results['documents'][0]:
             return "未在知识库中找到相关信息。"
-        context_str = ""
-        for i, doc in enumerate(results['documents'][0]):
-            source = results['metadatas'][0][i]['source']
-            context_str += f"--- Source: {source} ---\n{doc}\n\n"
-        return context_str
+        top_doc = results['documents'][0][0]
+        return top_doc
     except Exception as e:
         hint = ""
         if "Embedding model load failed" in str(e) or "Server disconnected" in str(e):
@@ -99,3 +96,59 @@ def ask_supervisor_approval(application_details: str) -> str:
     
     approval = input("主管请批复 (同意/拒绝/其他指令): ")
     return f"主管批复: {approval}"
+
+
+@tool
+def ask_installation_approval(installation_details: str) -> str:
+    """
+    提交包安装申请至主管并等待批复。
+    当用户需要上门安装/包安装等服务时使用，内容需包含尺寸、配置、地址、时间窗等信息。
+    Args:
+        installation_details: 格式化后的申请详情文本。
+    """
+    print("\n" + "="*50)
+    print("📢 【向主管申请包安装】")
+    print(installation_details)
+    print("="*50 + "\n")
+    approval = input("主管请批复 (同意/拒绝/其他指令): ")
+    return f"主管批复: {approval}"
+
+
+@tool
+def format_application_details(
+    申请类型: str,
+    尺寸: str,
+    配置: str,
+    支架: str,
+    台数: int,
+    赠品: str,
+    已报价格: str,
+    底价: str,
+    客户要求: str,
+    是否含税: str,
+    备注: str = ""
+) -> str:
+    """
+    生成统一的主管申请详情文本（价格申请与包安装申请通用）。
+    使用相同字段，便于直接传给 ask_supervisor_approval 或 ask_installation_approval。
+    Args:
+        申请类型: 如 "申请价格" 或 "申请包安装"
+        其余字段同系统提示中的申请格式
+    Returns:
+        标准化的申请详情字符串
+    """
+    lines = [
+        f"**{申请类型}**",
+        f"**尺寸:** {尺寸}",
+        f"**配置:** {配置}",
+        f"**支架:** {支架}",
+        f"**台数:** {台数}",
+        f"**赠品:** {赠品}",
+        f"**已报价格:** {已报价格}",
+        f"**底价:** {底价}",
+        f"**客户要求:** {客户要求}",
+        f"**是否含税:** {是否含税}",
+    ]
+    if 备注:
+        lines.append(f"**备注:** {备注}")
+    return "\n".join(lines)
