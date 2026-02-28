@@ -67,17 +67,74 @@ def search_local_knowledge(query: str) -> str:
             return "知识库为空，请先构建：运行 python build_rag.py"
         results = collection.query(
             query_texts=[query],
-            n_results=1
+            n_results=3
         )
         if not results['documents'] or not results['documents'][0]:
             return "未在知识库中找到相关信息。"
-        top_doc = results['documents'][0][0]
-        return top_doc
+        context_str = ""
+        for i, doc in enumerate(results['documents'][0]):
+            source = results['metadatas'][0][i]['source']
+            context_str += f"--- Source: {source} ---\n{doc}\n\n"
+        return context_str
     except Exception as e:
         hint = ""
         if "Embedding model load failed" in str(e) or "Server disconnected" in str(e):
             hint = "；请检查 DASHSCOPE_API_KEY 是否正确配置"
         return f"Error searching knowledge base: {str(e)}{hint}"
+
+@tool
+def search_media_asset(query: str) -> str:
+    """
+    Search for a related local media asset (image/video) by text query.
+    Returns best matched modality and absolute file path for sending to user.
+    """
+    try:
+        os.makedirs(CHROMA_PATH, exist_ok=True)
+        client = chromadb.PersistentClient(path=CHROMA_PATH)
+        embedding_fn = AliyunEmbeddingFunction()
+
+        img_col = client.get_or_create_collection(name="kb_image", embedding_function=embedding_fn)
+        vid_col = client.get_or_create_collection(name="kb_video", embedding_function=embedding_fn)
+
+        if img_col.count() == 0 and vid_col.count() == 0:
+            return "媒体库为空，请先构建：运行 python build_multimodal_kb.py"
+
+        candidates = []
+
+        if img_col.count() > 0:
+            r = img_col.query(query_texts=[query], n_results=1, include=["metadatas", "distances", "documents"])
+            if r.get("metadatas") and r["metadatas"][0]:
+                candidates.append(
+                    {
+                        "modality": "image",
+                        "path": r["metadatas"][0][0].get("path", ""),
+                        "score": float(r.get("distances", [[0.0]])[0][0]),
+                        "title": r["metadatas"][0][0].get("title", ""),
+                    }
+                )
+
+        if vid_col.count() > 0:
+            r = vid_col.query(query_texts=[query], n_results=1, include=["metadatas", "distances", "documents"])
+            if r.get("metadatas") and r["metadatas"][0]:
+                candidates.append(
+                    {
+                        "modality": "video",
+                        "path": r["metadatas"][0][0].get("path", ""),
+                        "score": float(r.get("distances", [[0.0]])[0][0]),
+                        "title": r["metadatas"][0][0].get("title", ""),
+                    }
+                )
+
+        if not candidates:
+            return "未在媒体库中找到相关文件。"
+
+        best = sorted(candidates, key=lambda x: x["score"])[0]
+        return f"modality={best['modality']}\npath={best['path']}\ntitle={best['title']}\ndistance={best['score']}"
+    except Exception as e:
+        hint = ""
+        if "Embedding model load failed" in str(e) or "Server disconnected" in str(e):
+            hint = "；请检查 DASHSCOPE_API_KEY 是否正确配置"
+        return f"Error searching media asset: {str(e)}{hint}"
 
 
 @tool

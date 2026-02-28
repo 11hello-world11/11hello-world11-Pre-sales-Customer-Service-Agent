@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_core.messages import HumanMessage, ToolMessage, SystemMessage, AIMessage
-from tools import search_local_knowledge, ask_supervisor_approval, ask_installation_approval, format_application_details
+from tools import search_local_knowledge, search_media_asset, ask_supervisor_approval, ask_installation_approval, format_application_details
 from logger import logger
 from session import save_session, load_session, list_sessions
 from skills.database_query.tools import (
@@ -211,6 +211,7 @@ async def main():
         # 合并 MCP 工具和本地工具
         tools = mcp_tools + [
             search_local_knowledge,
+            search_media_asset,
             ask_supervisor_approval,
             ask_installation_approval,
             format_application_details,

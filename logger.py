@@ -3,11 +3,7 @@ import os
 import sys
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
-
-try:
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-except Exception:
-    BASE_DIR = os.getcwd()
+from config import BASE_DIR, LOG_DIR, LOG_MAX_BYTES, LOG_BACKUP_COUNT
 
 
 def setup_logger(name: str = "qa_agent", log_level: int = logging.INFO) -> logging.Logger:
@@ -27,14 +23,12 @@ def setup_logger(name: str = "qa_agent", log_level: int = logging.INFO) -> loggi
     console_handler.setFormatter(log_format)
     logger.addHandler(console_handler)
 
-    log_dir = os.path.join(BASE_DIR, "logs")
-    os.makedirs(log_dir, exist_ok=True)
-
-    log_file = os.path.join(log_dir, f"qa_agent_{datetime.now().strftime('%Y%m%d')}.log")
+    os.makedirs(LOG_DIR, exist_ok=True)
+    log_file = os.path.join(LOG_DIR, f"qa_agent_{datetime.now().strftime('%Y%m%d')}.log")
     file_handler = RotatingFileHandler(
         log_file,
-        maxBytes=10 * 1024 * 1024,
-        backupCount=5,
+        maxBytes=LOG_MAX_BYTES,
+        backupCount=LOG_BACKUP_COUNT,
         encoding="utf-8"
     )
     file_handler.setFormatter(log_format)

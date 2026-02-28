@@ -100,3 +100,53 @@
 {"level":30,"time":1772196022748,"pid":3840,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
 {"level":30,"time":1772196029307,"pid":10308,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
 {"level":30,"time":1772196029308,"pid":10308,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772282133268,"pid":21420,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772282133269,"pid":21420,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772282388699,"pid":26768,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772282388700,"pid":26768,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772282512597,"pid":27204,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772282512598,"pid":27204,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772282519346,"pid":25524,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772282519346,"pid":25524,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772282525085,"pid":26020,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772282525085,"pid":26020,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772282616360,"pid":15960,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772282616361,"pid":15960,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772284381532,"pid":23232,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772284381533,"pid":23232,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285245732,"pid":16720,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285245733,"pid":16720,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285253957,"pid":17700,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285253957,"pid":17700,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285262503,"pid":28480,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285262503,"pid":28480,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285269346,"pid":28356,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285269347,"pid":28356,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285514240,"pid":10996,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285514241,"pid":10996,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285562214,"pid":26580,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285562214,"pid":26580,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285620872,"pid":3116,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285620873,"pid":3116,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285835518,"pid":25332,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285835519,"pid":25332,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285956156,"pid":25608,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285956157,"pid":25608,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285965612,"pid":29412,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285965613,"pid":29412,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772285972794,"pid":28476,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772285972795,"pid":28476,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772286057507,"pid":27380,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772286057507,"pid":27380,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772286680364,"pid":23284,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772286680365,"pid":23284,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772287106144,"pid":10312,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772287106144,"pid":10312,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772287145023,"pid":960,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772287145023,"pid":960,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772287154323,"pid":18040,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772287154324,"pid":18040,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772287160023,"pid":17760,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772287160024,"pid":17760,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
+{"level":30,"time":1772287168691,"pid":28372,"hostname":"DESKTOP-9OJG32T","msg":"config>{\"host\":\"localhost\",\"user\":\"root\",\"password\":\"******\",\"database\":\"good_message_qa\",\"port\":3306}"}
+{"level":30,"time":1772287168692,"pid":28372,"hostname":"DESKTOP-9OJG32T","msg":"MySQL MCP server running on stdio"}
