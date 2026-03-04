@@ -24,7 +24,7 @@ VERBOSE = str(os.environ.get("AGENT_VERBOSE", "")).lower() in ("1", "true", "yes
 if not VERBOSE:
     logger.setLevel(logging.WARNING)
 
-def get_sliding_window_messages(messages, window_size=15):
+def get_sliding_window_messages(messages, window_size=25):
     if len(messages) <= window_size:
         return messages
     
@@ -80,6 +80,19 @@ def build_system_prompt_with_key_info(static_prompt, key_info):
     key_info_str += "\n"
     
     return key_info_str + static_prompt
+
+
+def build_system_prompt_with_slots(static_prompt, slots):
+    if not slots:
+        return static_prompt
+    
+    slots_str = "【已确认的订单信息】\n"
+    for key, value in slots.items():
+        if value:
+            slots_str += f"{key}：{value}\n"
+    slots_str += "\n"
+    
+    return slots_str + static_prompt
 
 
 def filter_orphan_tool_messages(msgs: List):
@@ -271,8 +284,8 @@ async def main():
             if extracted_key_info:
                 key_info.update(extracted_key_info)
             
-            # 2. 构建带 key_info 的动态 system prompt
-            dynamic_system_prompt_content = build_system_prompt_with_key_info(
+            # 2. 构建带槽位信息的动态 system prompt
+            dynamic_system_prompt_content = build_system_prompt_with_slots(
                 system_prompt_content, 
                 key_info
             )
@@ -280,7 +293,7 @@ async def main():
             
             # 3. 获取滑动窗口消息（不包含原始的 system prompt）
             messages_without_system = [msg for msg in chat_history if not isinstance(msg, SystemMessage)]
-            sliding_messages = get_sliding_window_messages(messages_without_system, window_size=15)
+            sliding_messages = get_sliding_window_messages(messages_without_system, window_size=25)
             
             # 4. 组合：动态 system prompt + 滑动窗口消息
             messages = [dynamic_system_prompt] + sliding_messages
